@@ -36,13 +36,21 @@ public class ArticleRepository {
     public long write(String title, String body, boolean isBlind) {
         SecSql sql = myMap.genSecSql();
         sql
-                .append("INSERT INTO article")
-                .append("SET createdDate = NOW()")
-                .append(", modifiedDate = NOW()")
-                .append(", title = ?", title)
-                .append(", body = ?", body)
-                .append(", isBlind = ?", isBlind);
-
+                .append("INSERT INTO article(createdDate, modifiedDate, title, body, isBlind)")
+                .append("VALUES(NOW(), NOW(), ?, ?, ?)", title, body, isBlind);
+        
         return sql.insert();
+    }
+
+    public void modify(long id, String title, String body, boolean isBlind) {
+        SecSql sql = myMap.genSecSql();
+        sql
+                .append("UPDATE article")
+                .append("SET title = ?,", title)
+                .append("body = ?,", body)
+                .append("isBlind = ?", isBlind)
+                .append("WHERE id = ?", id);
+
+        sql.update();
     }
 }
