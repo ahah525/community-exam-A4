@@ -66,14 +66,14 @@ public class ArticleRepository {
 
     public ArticleDto getPrevArticle(long id) {
         SecSql sql = myMap.genSecSql();
-        sql.append("SELECT * FROM article WHERE id < ? ORDER BY ID DESC LIMIT 1", id);
+        sql.append("SELECT * FROM article WHERE id < ? AND isBlind = 0 ORDER BY ID DESC LIMIT 1", id);
 
         return sql.selectRow(ArticleDto.class);
     }
 
     public ArticleDto getNextArticle(long id) {
         SecSql sql = myMap.genSecSql();
-        sql.append("SELECT * FROM article WHERE id > ? ORDER BY ID LIMIT 1", id);
+        sql.append("SELECT * FROM article WHERE id > ? AND isBlind = 0 ORDER BY ID LIMIT 1", id);
 
         return sql.selectRow(ArticleDto.class);
     }

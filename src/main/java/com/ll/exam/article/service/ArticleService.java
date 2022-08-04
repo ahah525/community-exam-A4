@@ -43,4 +43,7 @@ public class ArticleService {
     public ArticleDto getNextArticle(long id) {
         return articleRepository.getNextArticle(id);
     }
+
+    public void updateArticleBlind(int startId, int i1) {
+    }
 }
