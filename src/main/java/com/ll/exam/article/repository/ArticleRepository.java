@@ -38,7 +38,7 @@ public class ArticleRepository {
         sql
                 .append("INSERT INTO article(createdDate, modifiedDate, title, body, isBlind)")
                 .append("VALUES(NOW(), NOW(), ?, ?, ?)", title, body, isBlind);
-        
+
         return sql.insert();
     }
 
@@ -46,9 +46,19 @@ public class ArticleRepository {
         SecSql sql = myMap.genSecSql();
         sql
                 .append("UPDATE article")
-                .append("SET title = ?,", title)
+                .append("SET modifiedDate = NOW(),")
+                .append("title = ?,", title)
                 .append("body = ?,", body)
                 .append("isBlind = ?", isBlind)
+                .append("WHERE id = ?", id);
+
+        sql.update();
+    }
+
+    public void delete(long id) {
+        SecSql sql = myMap.genSecSql();
+        sql
+                .append("DELETE FROM article")
                 .append("WHERE id = ?", id);
 
         sql.update();
