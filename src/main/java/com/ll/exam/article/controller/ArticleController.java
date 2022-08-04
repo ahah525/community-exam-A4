@@ -51,7 +51,7 @@ public class ArticleController {
         long id = articleService.write(title, body);
         System.out.println(id);
 
-        rq.replace("/usr/article/detail/free/%d".formatted(id), "%d번 게시물이 생성 되었습니다.".formatted(id));
+        rq.replace("/usr/article/detail/%d".formatted(id), "%d번 게시물이 생성 되었습니다.".formatted(id));
     }
 
     // 게시글 상세화면 조회
