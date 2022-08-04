@@ -16,11 +16,18 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
+    // 게시물 리스트
     @GetMapping("/usr/article/list")
     public void showList(Rq rq) {
         List<ArticleDto> articleDtos = articleService.getArticles();
 
         rq.setAttr("articles", articleDtos);
         rq.view("usr/article/list");
+    }
+
+    // 게시물 작성폼
+    @GetMapping("/usr/article/write")
+    public void showWrite(Rq rq) {
+        rq.view("usr/article/write");
     }
 }
