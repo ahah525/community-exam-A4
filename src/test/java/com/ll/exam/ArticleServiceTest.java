@@ -140,4 +140,34 @@ public class ArticleServiceTest {
         ArticleDto article = articleService.getArticleById(1);
         assertThat(article).isNull();
     }
+
+    @Test
+    public void 이전글_가져오기() {
+        ArticleDto prevArticleDto = articleService.getArticleById(2);
+        ArticleDto articleDto = articleService.getPrevArticle(3);
+
+        assertThat(articleDto).isEqualTo(prevArticleDto);
+    }
+
+    @Test
+    public void _1번글의_이전글은_없다() {
+        ArticleDto articleDto = articleService.getPrevArticle(1);
+
+        assertThat(articleDto).isNull();
+    }
+
+    @Test
+    public void 다음글_가져오기() {
+        ArticleDto nextArticleDto = articleService.getArticleById(4);
+        ArticleDto articleDto = articleService.getNextArticle(3);
+
+        assertThat(articleDto).isEqualTo(nextArticleDto);
+    }
+
+    @Test
+    public void _마지막글의_다음글은_없다() {
+        ArticleDto articleDto = articleService.getNextArticle(TEST_DATA_SIZE);
+
+        assertThat(articleDto).isNull();
+    }
 }
